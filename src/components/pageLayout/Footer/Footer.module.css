@@ -1,0 +1,27 @@
+.footer {
+  margin: calc(var(--page-padding) * 2) 0 0 0;
+
+  font-size: var(--small-body-size);
+
+  /* > div {
+    padding: var(--page-padding) 0 0 0;
+  } */
+}
+
+.footerContent {
+  padding-top: var(--page-padding);
+  @mixin large-mobile {
+    border-top: 1px solid var(--color-light);
+  }
+}
+
+.line {
+  position: relative;
+  margin-top: -1px;
+  z-index: 1001;
+  border-bottom: 1px solid var(--color-light);
+
+  @mixin large-mobile {
+    border-bottom: 0px solid var(--color-light);
+  }
+}

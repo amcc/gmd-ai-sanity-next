@@ -1,0 +1,107 @@
+.default {
+  /* transition: all 1.2s ease; */
+}
+
+/* Base button styles */
+.categoryButton {
+  background: transparent;
+  border: 1px solid var(--color-darkwall);
+  border-radius: var(--radius-small);
+  padding: 0px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* color: var(--color-secondary); */
+  color: var(--color-text);
+  font-size: var(--small-body-size);
+  font-weight: var(--sans-weight);
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--color-bg);
+}
+
+.categoryButton.active {
+  border-color: var(--color-secondary);
+  background: var(--color-darkwall);
+  color: var(--color-bg);
+  /* color: var(--color-secondary); */
+}
+
+/* Toggle button variant - can be used for menu toggle */
+.toggleButton {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  /* padding: 0; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Clear button variant */
+.clearButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--color-secondary);
+  cursor: pointer;
+  padding: 4px;
+  transition: background-color 0.2s ease;
+}
+
+/* Toggle button variant - can be used for menu toggle */
+.submitButton {
+  background: var(--color-darkwall);
+
+  border-radius: var(--radius-small);
+  border: none;
+  color: var(--color-bg);
+  /* color: inherit; */
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  padding: 0px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+/* Enable hover only on non-touch devices */
+@mixin hover {
+  .categoryButton:hover {
+    border-color: var(--color-light);
+    background: var(--color-light);
+    color: var(--color-text);
+    text-decoration: none !important;
+  }
+
+  .toggleButton:hover {
+    color: var(--color-secondary);
+  }
+
+  .submitButton:hover {
+    color: var(--color-text);
+    background: var(--color-light);
+  }
+
+  .clearButton:hover {
+    background-color: #f0f0f0;
+    color: var(--color-text);
+  }
+}
+
+.toggleButton:active,
+.toggleButton:focus {
+  background: transparent !important;
+  outline: none;
+}

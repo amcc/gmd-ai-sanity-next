@@ -1,0 +1,66 @@
+{
+  "webhooks": [
+    {
+      "name": "Artwork Content Updates",
+      "url": "https://yourdomain.com/api/revalidate",
+      "httpMethod": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "filter": "_type == \"artwork\"",
+      "projection": {
+        "_type": "_type",
+        "slug": "slug",
+        "_id": "_id",
+        "title": "title"
+      },
+      "bodyTemplate": "{\"secret\": \"your-secret-key-here\", \"_type\": \"{{document._type}}\", \"slug\": {{document.slug}}, \"_id\": \"{{document._id}}\", \"title\": \"{{document.title}}\", \"operation\": \"{{operation}}\"}"
+    },
+    {
+      "name": "Biography Content Updates",
+      "url": "https://yourdomain.com/api/revalidate",
+      "httpMethod": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "filter": "_type == \"biography\"",
+      "projection": {
+        "_type": "_type",
+        "slug": "slug",
+        "_id": "_id",
+        "title": "title"
+      },
+      "bodyTemplate": "{\"secret\": \"your-secret-key-here\", \"_type\": \"{{document._type}}\", \"slug\": {{document.slug}}, \"_id\": \"{{document._id}}\", \"title\": \"{{document.title}}\", \"operation\": \"{{operation}}\"}"
+    },
+    {
+      "name": "Studio Content Updates",
+      "url": "https://yourdomain.com/api/revalidate",
+      "httpMethod": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "filter": "_type == \"studio\"",
+      "projection": {
+        "_type": "_type",
+        "slug": "slug",
+        "_id": "_id",
+        "title": "title"
+      },
+      "bodyTemplate": "{\"secret\": \"your-secret-key-here\", \"_type\": \"{{document._type}}\", \"slug\": {{document.slug}}, \"_id\": \"{{document._id}}\", \"title\": \"{{document.title}}\", \"operation\": \"{{operation}}\"}"
+    },
+    {
+      "name": "Homepage Content Updates",
+      "url": "https://yourdomain.com/api/revalidate",
+      "httpMethod": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "filter": "_type == \"homepageSingleton\"",
+      "projection": {
+        "_type": "_type",
+        "_id": "_id"
+      },
+      "bodyTemplate": "{\"secret\": \"your-secret-key-here\", \"_type\": \"{{document._type}}\", \"_id\": \"{{document._id}}\", \"operation\": \"{{operation}}\"}"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.moreLink {
+  display: inline-block;
+  margin-top: var(--page-padding);
+  padding-top: var(--page-padding);
+  /* border-top: 1px solid black; */
+
+  text-transform: uppercase;
+}

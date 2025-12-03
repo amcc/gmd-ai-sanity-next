@@ -1,0 +1,70 @@
+.artworkPage {
+  margin-top: var(--artwork-top-spacing);
+}
+
+.mainImage {
+  padding-bottom: var(--page-padding);
+}
+
+.artInfoContainer {
+  display: block;
+  padding-bottom: var(--page-padding);
+  @mixin tablet {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--page-padding);
+  }
+
+  > section {
+    flex-basis: 3;
+  }
+}
+
+.details {
+  min-width: clamp(250px, 40%, 600px);
+  margin-bottom: calc(var(--page-padding) * 4);
+  > div {
+    max-width: clamp(450px, 50%, 800px);
+  }
+
+  .date,
+  .material,
+  .dimensions {
+    margin-bottom: 1em;
+  }
+  .material {
+    font-style: italic;
+  }
+  .date {
+    font-weight: bold;
+  }
+}
+
+.artworksGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--fib5);
+  margin-top: var(--fib3);
+
+  @mixin tablet {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @mixin desktop {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.artworkItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--page-padding);
+  /* gap: var(--grid-gap); */
+}
+
+.itemCaption {
+  /* font-size: var(--small-body-size); */
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: var(--fib1) 0 var(--fib3) 0;
+}

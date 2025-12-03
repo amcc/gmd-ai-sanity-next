@@ -1,0 +1,137 @@
+.contactForm {
+  max-width: 600px;
+  margin: 2rem 0;
+
+  button {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  /* border: 1px solid var(--color-border, #ccc); */
+  border-radius: 4px;
+  font-family: inherit;
+  /* font-size: 1rem; */
+  transition: border-color 0.2s ease;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  /* border-color: var(--color-darkwall, #000); */
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submitButton {
+  background: var(--color-darkwall, #000);
+  color: var(--color-background, #fff);
+  border: none;
+  padding: 0.75rem 2rem;
+  /* font-size: 1rem; */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.submitButtonOverride {
+  padding: 0.75rem 1.5rem;
+}
+
+.submitButton:hover {
+  opacity: 0.8;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hide honeypot field */
+.hiddenField {
+  position: absolute;
+  left: -9999px;
+  visibility: hidden;
+}
+
+/* Success message styles */
+.successMessage {
+  border-top: 1px solid var(--color-light);
+  border-bottom: 1px solid var(--color-light);
+  margin: var(--page-padding) 0;
+  padding: var(--page-padding) 0;
+  /* max-width: 600px;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--color-success-bg, #f0f8f0);
+  border: 1px solid var(--color-success, #4caf50);
+  border-radius: 4px;
+  text-align: center; */
+}
+
+.successMessage h3 {
+  /* color: var(--color-success, #4caf50); */
+  margin-bottom: 1rem;
+}
+
+.successMessage p {
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.resetButton {
+  background: var(--color-darkwall, #000);
+  color: var(--color-background, #fff);
+  border: none;
+  padding: 0.75rem 2rem;
+  /* font-size: 1rem; */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.resetButton:hover {
+  opacity: 0.8;
+}
+
+/* Error message styles */
+.errorMessage {
+  background: var(--color-error-bg, #fef2f2);
+  border: 1px solid var(--color-error, #ef4444);
+  color: var(--color-error, #ef4444);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .contactForm {
+    margin: 1rem 0;
+  }
+
+  .formInput,
+  .formTextarea {
+    padding: 0.625rem;
+  }
+
+  .successMessage {
+    margin: 1rem 0;
+    padding: 1.5rem;
+  }
+}

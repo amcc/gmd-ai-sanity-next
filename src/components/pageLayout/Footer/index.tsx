@@ -1,0 +1,17 @@
+import styles from "./Footer.module.css";
+
+const Footer = () => {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="padded-menu">
+      <div className={styles.line}></div>
+      <div className={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className="body-section">© {year} Alistair McClymont</div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export { Footer };

@@ -1,0 +1,153 @@
+"use client";
+
+import React, { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
+import { ARTWORKS_QUERYResult } from "@/sanity/types";
+import { SanityImage } from "@/sanity/components/SanityImage";
+// import { useDesktopSize, useTabletSize } from "@/hooks/mixins";
+import styles from "./FeaturedArtworks.module.css";
+
+interface FeaturedArtworksProps {
+  artworks: ARTWORKS_QUERYResult;
+  recent?: boolean;
+}
+
+const FeaturedArtworks = ({ artworks }: FeaturedArtworksProps) => {
+  // For a 2-column grid, images will be ~50vw minus gaps and padding
+  const sizes = `calc(50vw - 8px - 20px)`;
+
+  // Get all unique categories from artworks
+  const allCategories = useMemo(() => {
+    const categorySet = new Set<string>();
+    artworks.forEach((artwork) => {
+      artwork.categories?.forEach((cat) => {
+        if (cat.title) {
+          categorySet.add(cat.title);
+        }
+      });
+    });
+    return Array.from(categorySet).sort();
+  }, [artworks]);
+
+  // Filter artworks based on selected category and search term
+  const filteredArtworks = useMemo(() => {
+    let filtered = artworks;
+
+    // Filter by category
+    if (selectedCategory) {
+      filtered = filtered.filter((artwork) =>
+        artwork.categories?.some((cat) => cat.title === selectedCategory)
+      );
+    }
+
+    // Filter by search term
+    if (searchTerm.trim()) {
+      filtered = filtered.filter((artwork) => {
+        const titleMatch = artwork.title
+          ?.toLowerCase()
+          .includes(searchTerm.toLowerCase().trim());
+        const descriptionMatch = artwork.description?.some(
+          (block: DescriptionBlock) =>
+            block._type === "block" &&
+            block.children?.some((child: TextChild) =>
+              child.text
+                ?.toLowerCase()
+                .includes(searchTerm.toLowerCase().trim())
+            )
+        );
+        return titleMatch || descriptionMatch;
+      });
+    }
+
+    return filtered;
+  }, [artworks, selectedCategory, searchTerm]);
+
+  // show only 10 artworks if recent is true
+  const displayedArtworks = recent
+    ? filteredArtworks.slice(0, 10)
+    : filteredArtworks;
+
+  return (
+    <div>
+      {/* Search and Filters */}
+      {!recent && (
+        <SearchFilters
+          showFilters={showFilters}
+          setShowFilters={setShowFilters}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          allCategories={allCategories}
+        />
+      )}
+
+      {/* Artworks Grid */}
+      <div className={styles.grid}>
+        {displayedArtworks.map((artwork) => {
+          if (!artwork || !artwork.slug || !artwork.mainImage?.asset) {
+            return null;
+          }
+
+          const artworkDate = artwork.artworkDate
+            ? new Date(artwork.artworkDate).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })
+            : "";
+
+          const categories = artwork.categories || null;
+          return (
+            <div key={artwork.mainImage.asset._id} className={styles.gridItem}>
+              <Link
+                href={`/artwork/${artwork.slug.current}`}
+                aria-label={`View artwork: ${artwork.title}`}
+                className={styles.link}
+              >
+                <figure>
+                  <div>
+                    <SanityImage
+                      image={artwork.mainImage}
+                      dpr={2}
+                      sizes={sizes}
+                      fill={false}
+                    />
+                  </div>
+                  <figcaption>
+                    <h3 className={"grid-title"}>{artwork.title}</h3>
+                    <div className={"grid-date"}>{artworkDate}</div>
+                    {categories && !recent && (
+                      <div
+                        className={`${styles.categories} ${showFilters && styles.showCategories}`}
+                      >
+                        {categories.map((cat) => (
+                          <FilterButton
+                            key={cat._id}
+                            variant="category"
+                            className={styles.category}
+                            isActive={selectedCategory === cat.title}
+                            onClick={(e) => {
+                              e?.preventDefault();
+                              e?.stopPropagation();
+                              setSelectedCategory(cat.title);
+                              setShowFilters(true);
+                            }}
+                          >
+                            {cat.title}
+                          </FilterButton>
+                        ))}
+                      </div>
+                    )}
+                  </figcaption>
+                </figure>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export { FeaturedArtworks };

@@ -1,0 +1,272 @@
+:root {
+  --desktop-scale: 0.68;
+  --mobile-scale: 0.454166;
+  --font-mobile-scale-factor: var(--mobile-scale);
+  --font-desktop-scale-factor: var(--desktop-scale);
+  --f1: 1;
+  --f2: 2;
+  --f3: 3;
+  --f4: 5;
+  --f5: 8;
+  --f6: 13;
+  --f7: 21;
+  --f8: 34;
+
+  --h-fw: 300;
+
+  --font-scale: var(--font-mobile-scale-factor);
+
+  @mixin desktop {
+    --font-scale: var(--font-desktop-scale-factor);
+  }
+
+  --fib00: calc(var(--base-font-size) * var(--f1) * var(--font-scale));
+  --fib0: calc(var(--base-font-size) * var(--f2) * var(--font-scale));
+  --fib1: calc(var(--base-font-size) * var(--f3) * var(--font-scale));
+  --fib2: calc(var(--base-font-size) * var(--f4) * var(--font-scale));
+  --fib3: calc(var(--base-font-size) * var(--f5) * var(--font-scale));
+  --fib4: calc(var(--base-font-size) * var(--f6) * var(--font-scale));
+
+  --serif-multiplier: 1.22;
+  @mixin tablet {
+    --serif-multiplier: 1.12;
+  }
+  --fib00-serif: calc(var(--fib00) * var(--serif-multiplier));
+  --fib0-serif: calc(var(--fib0) * var(--serif-multiplier));
+  --fib1-serif: calc(var(--fib1) * var(--serif-multiplier));
+  --fib2-serif: calc(var(--fib2) * var(--serif-multiplier));
+  --fib3-serif: calc(var(--fib3) * var(--serif-multiplier));
+  --fib4-serif: calc(var(--fib4) * var(--serif-multiplier));
+
+  /* Adobe Fonts with size-matched fallbacks to prevent layout shift */
+  /* --adobe-sans: hagrid, sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif; */
+  --adobe-sans:
+    "neue-haas-grotesk-display", sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --adobe-serif: minion-3, "Times New Roman", Times, serif;
+
+  /* Font stacks optimized for minimal layout shift */
+  /* --body-font: var(--adobe-sans);
+  --paragraph-font: var(--adobe-serif); */
+  /* --paragraph-font: var(--font-source-serif); */
+
+  --base-font-size: 16px;
+  --body-size: var(--fib1);
+  --body-serif-size: var(--fib1-serif);
+  --body-text: var(--color-text);
+  --small-body-size: calc(var(--fib0) * 1.1);
+  --very-small-body-size: var(--fib00);
+
+  --body-line-height: calc(var(--body-size) * 1.4);
+
+  --h1-fs: var(--fib3);
+  --h2-fs: var(--fib2);
+  --h3-fs: var(--fib2);
+
+  --h1-lh: calc(var(--fib3) * 1.35);
+  --h2-lh: calc(var(--fib2) * 1.35);
+  --h3-lh: calc(var(--fib1) * 1.35);
+
+  --sans-weight: 500;
+  --serif-weight: 400;
+  --grid-title-weight: 700;
+}
+
+/* Font loading states for optimal performance and no hydration mismatch */
+:root {
+  /* Default to system fonts to match server rendering */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-serif:
+    "Times New Roman", Times, "Liberation Serif", "Nimbus Roman No9 L",
+    "Georgia", "Century Schoolbook", serif;
+}
+
+/* Only apply font changes after client-side hydration */
+.fonts-loading {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-serif:
+    "Times New Roman", Times, "Liberation Serif", "Nimbus Roman No9 L",
+    "Georgia", "Century Schoolbook", serif;
+}
+
+.fonts-loaded {
+  /* Switch to your preferred fonts once loaded */
+  --font-sans: var(--adobe-sans);
+  --font-serif: var(--adobe-serif);
+}
+
+.fonts-failed {
+  /* Fallback if fonts fail to load */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-serif:
+    "Times New Roman", Times, "Liberation Serif", "Nimbus Roman No9 L",
+    "Georgia", "Century Schoolbook", serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+body {
+  /* font-family: var(--body-font); */
+  /* font-family: var(--adobe-sans); */
+  /* font-family: var(--font-ibm-plex-sans); */
+  font-weight: var(--sans-weight);
+  /* font-style: normal; */
+  font-size: var(--body-size);
+  line-height: var(--body-line-height);
+
+  /* beauty text styles */
+  text-wrap: pretty;
+}
+
+* {
+  /* letter-spacing: var(--letter-spacing); */
+}
+
+h1,
+h2,
+h3,
+.big-title {
+  /* font-family: "aktiv-grotesk", sans-serif; */
+  font-weight: inherit;
+  font-style: normal;
+  margin: var(--fib1) 0 var(--fib1) 0;
+  @mixin desktop {
+    margin: var(--fib2) 0 var(--fib2) 0;
+  }
+  /* margin-bottom: 1em; */
+  font-weight: var(--h-fw);
+}
+
+h1,
+.big-title {
+  font-size: var(--h3-fs);
+  margin-bottom: var(--fib1);
+  line-height: var(--h2-lh);
+  font-family: var(--adobe-sans);
+  font-weight: 700;
+  @mixin desktop {
+    font-size: var(--h1-fs);
+    line-height: var(--h1-lh);
+    margin-bottom: var(--fib2);
+  }
+}
+
+h2 {
+  font-size: var(--h2-fs);
+  line-height: var(--h2-lh);
+}
+h3 {
+  font-size: var(--h3-fs);
+  line-height: var(--h2-lh);
+  /* font-style: italic; */
+}
+
+p {
+  /* font-family: var(--font-serif); */
+  /* margin: var(--fib2) 0 var(--fib2) 0; */
+  margin-block-end: 0;
+  margin-block-start: 0;
+  margin-top: 1em;
+  margin-bottom: 0;
+  /* font-family: var(--paragraph-font); */
+  font-weight: var(--serif-weight);
+  /* font-size: 104.1667%; */
+}
+
+.block-text {
+  font-family: var(--font-serif);
+  font-weight: var(--serif-weight);
+  font-size: var(--body-serif-size);
+  line-height: var(--body-line-height);
+}
+
+.big-title {
+  text-transform: uppercase;
+}
+
+.page-title {
+  text-transform: uppercase;
+  font-family: var(--adobe-sans);
+  font-size: var(--h3-fs);
+  @mixin tablet {
+    font-size: var(--h1-fs);
+  }
+  font-weight: 900;
+  margin-top: 20px;
+}
+
+/* .logoType {
+  font-size: var(--heading-size-mobile);
+  @mixin tablet {
+    font-size: var(--heading-size-desktop);
+  }
+} */
+
+.grid-title {
+  font-family: var(--adobe-sans);
+  font-size: var(--sub-header-size);
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  /* text-align: center; */
+  /* color: var(--color-primary); */
+  /* text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.9); */
+  text-decoration: none;
+}
+
+.grid-date {
+  font-family: var(--font-sans);
+  font-size: var(--small-body-size);
+  font-weight: var(--serif-weight);
+  padding-top: 8px;
+}
+
+/* Fix iOS double-tap issue by removing hover states on touch devices */
+/* Disable hover effects on touch devices */
+/* @media (hover: none) and (pointer: coarse) {
+  a:hover,
+  button:hover,
+  [role="button"]:hover,
+  .hover-effect:hover {
+    opacity: 1 !important;
+    transform: none !important;
+    background-color: initial !important;
+    color: initial !important;
+  }
+} */
+
+/* Alternative: Use hover only when available */
+@mixin hover {
+  /* Only apply hover effects on devices that can actually hover */
+  a:hover {
+    /* Your hover styles here */
+    /* opacity: 0.8; */
+    filter: contrast(1.05) brightness(1.05);
+  }
+
+  button:hover {
+    /* Your button hover styles here */
+  }
+}
+
+/* Global hover styles for gridTitle when parent elements are hovered */
+@mixin hover {
+  /* When a link contains a gridTitle, hover the link to change the gridTitle color */
+  a:hover .grid-title {
+    color: var(--color-secondary);
+  }
+
+  /* When the gridTitle itself is a link */
+  .grid-title:hover {
+    color: var(--color-secondary);
+  }
+}

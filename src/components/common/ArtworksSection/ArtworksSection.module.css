@@ -1,0 +1,35 @@
+.artworksGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--fib5);
+  margin-top: var(--fib3);
+
+  @mixin tablet {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @mixin desktop {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.artworkItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--page-padding);
+
+  img {
+    /* object-position: left; */
+  }
+  /* gap: var(--grid-gap); */
+}
+
+.itemCaption {
+  /* font-size: var(--small-body-size); */
+  font-family: var(--font-sans);
+  font-size: var(--body-size) !important;
+  font-weight: var(--sans-weight);
+  line-height: var(--body-line-height);
+  margin: 0;
+  padding: var(--fib1) 0 var(--fib3) 0;
+}

@@ -1,0 +1,93 @@
+/* Fullscreen Menu Overlay */
+.menuOverlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-darkwall, #fff);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    color: var(--color-bg);
+
+    a {
+      color: var(--color-bg);
+    }
+  }
+
+  li {
+    /* width: 100%; */
+  }
+}
+
+.fullscreenMenuWrapper {
+  display: flex;
+  width: 100%;
+}
+/* Fullscreen Menu Items */
+.fullscreenMenu {
+  list-style: none;
+  padding: 0;
+  font-weight: 900;
+  line-height: var(--h2-lh);
+
+  margin-top: calc(var(--menu-padding) + var(--h2-lh) + 20px);
+
+  @mixin tablet {
+    h2 {
+      line-height: var(--h1-lh);
+    }
+    margin-top: calc(var(--menu-padding) + var(--h2-lh) + var(--page-padding));
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  li.first > * {
+    margin-top: 0;
+  }
+
+  a {
+    /* font-size: 3rem; */
+    /* font-weight: 700; */
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &.active {
+      color: var(--color-secondary);
+    }
+  }
+}
+
+/* Enable hover only on non-touch devices */
+@mixin hover {
+  .popup li a:hover {
+    color: var(--color-secondary);
+  }
+
+  .open .fullscreenMenu a:hover {
+    color: var(--color-secondary);
+  }
+}

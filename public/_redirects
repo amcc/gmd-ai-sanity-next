@@ -1,0 +1,8 @@
+# Serve SW files on www so they can unregister old SW
+
+/sw.js /sw.js 200
+/service-worker.js /service-worker.js 200
+
+# Redirect www to root
+
+# https://www.alistairmcclymont.com/* https://alistairmcclymont.com/:splat 301!

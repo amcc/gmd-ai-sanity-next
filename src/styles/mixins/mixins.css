@@ -1,0 +1,57 @@
+/* 
+  This file contains mixins for media queries and other reusable styles
+  we can not use these mixins in the @define-mixin blocks below
+  because they are not supported in the current version of CSS
+  but we can read them in JavaScript which is handy - so just make sure they're the same
+*/
+
+:root {
+  --large-mobile-size: 35em;
+  --tablet-size: 48em;
+  --desktop-size: 60em;
+  --widescreen-size: 75em;
+}
+
+@define-mixin clamp $lines {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+/* 
+@define-mixin break $size {
+  @media screen and (min-width: $size) {
+    @mixin-content;
+  }
+} */
+
+@define-mixin large-mobile {
+  @media screen and (min-width: 35em) {
+    @mixin-content;
+  }
+}
+
+@define-mixin tablet {
+  @media screen and (min-width: 48em) {
+    @mixin-content;
+  }
+}
+
+@define-mixin desktop {
+  @media screen and (min-width: 60em) {
+    @mixin-content;
+  }
+}
+
+@define-mixin widescreen {
+  @media screen and (min-width: 75em) {
+    @mixin-content;
+  }
+}
+
+@define-mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    @mixin-content;
+  }
+}
