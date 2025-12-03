@@ -47,10 +47,8 @@ export default async function Home() {
             AI is a useful tool, be clear why and how you are using it and the
             role it has within your work.
           </p>
-
           {faqs.length > 0 && (
             <div id="faq" className={styles.faqSection}>
-              <p>UAL has a number of resources on AI. Find them below:</p>{" "}
               <p>
                 <a
                   href="https://www.arts.ac.uk/about-ual/teaching-and-learning-exchange/digital-learning/ai-and-education/student-guide-to-generative-ai"
@@ -60,6 +58,7 @@ export default async function Home() {
                   Student guide to generative AI
                 </a>
               </p>
+              <h2>Frequently Asked Questions:</h2>
               <div className={styles.faqList}>
                 {faqs.map((faq: Faq) => (
                   <div key={faq._id} className={styles.faqItem}>
