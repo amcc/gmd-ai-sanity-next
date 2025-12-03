@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const Sketch = dynamic(() => import("react-p5"), {
   ssr: false,
 });

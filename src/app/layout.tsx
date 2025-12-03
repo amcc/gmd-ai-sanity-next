@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { ConditionalLayout } from "@/components/pageLayout/ConditionalLayout";
-import PlausibleProvider from "next-plausible";
 import FontLoader from "@/components/FontLoader";
 import UnregisterServiceWorker from "@/components/common/UnregisterServiceWorker";
 
@@ -45,13 +44,16 @@ export default function RootLayout({
       // className={`${ibm_plex_sans} ${ibm_plex_mono} ${noto_sans} ${source_serif}`}
     >
       <head>
-        {/* Google Fonts */}
+        {/* Google Fonts - next/font preferred but link works in App Router */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
           rel="stylesheet"
