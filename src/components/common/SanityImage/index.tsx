@@ -33,7 +33,7 @@ type Props = {
 
 const SanityImage = ({
   image,
-  alt = "Alistair McClymont",
+  alt = "GMD AI",
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
   aspectRatio,
   quality = 85, // Reduced from 98 - still high quality but much smaller files

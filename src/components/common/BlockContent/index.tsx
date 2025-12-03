@@ -5,7 +5,6 @@ import {
 } from "@portabletext/react";
 import { SanityImage } from "@/components/common/SanityImage";
 import Link from "next/link";
-import { ArtworkFigure } from "../ImageGrid/ArtworkFigure";
 import styles from "./BlockContent.module.css";
 
 // import { log } from "@/utils/common";
@@ -136,49 +135,7 @@ const components: PortableTextComponents = {
       </pre>
     ),
 
-    // Artwork references (if you want to embed artworks)
-    artworkReference: ({ value }) => {
-      if (!value.artwork) return null;
-
-      console.log("artworkReference value", value);
-
-      return (
-        <div className={styles.artworkEmbed}>
-          <Link href={`/artwork/${value.artwork.slug?.current}`}>
-            <div className={styles.artworkCard}>
-              <ArtworkFigure
-                artwork={value.artwork}
-                // sizes={sizes}
-                // recent={recent}
-                // priority={true}
-                showFilters={false}
-                showDate={false}
-                showCategories={false}
-                // selectedCategory={selectedCategory}
-                // setSelectedCategory={setSelectedCategory}
-                // setShowFilters={setShowFilters}
-              />
-            </div>
-            {/* <div className={styles.artworkCard}>
-              {value.artwork.mainImage && (
-                <SanityImage
-                  image={value.artwork.mainImage}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              )}
-              <div className={styles.artworkInfo}>
-                <h4>{value.artwork.title}</h4>
-                {value.artwork.artworkDate && (
-                  <p className={styles.artworkDate}>
-                    {new Date(value.artwork.artworkDate).getFullYear()}
-                  </p>
-                )}
-              </div>
-            </div> */}
-          </Link>
-        </div>
-      );
-    },
+    // Artwork references are not used in this site variant
   },
 };
 

@@ -52,7 +52,7 @@ const Menu = () => {
                 // className={pathname === "/" ? styles.active : ""}
               >
                 {/* ALISTAIR M<span className={styles.shiftedC}>c</span>CLYMONT */}
-                ALISTAIR McCLYMONT
+                GMD AI
               </Link>
             </li>
             {pathnameArray && pathnameArray.length > 1 && (

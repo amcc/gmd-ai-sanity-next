@@ -43,7 +43,7 @@ export default async function HomepageOGImage() {
                 height: "100%",
                 objectFit: "cover",
               }}
-              alt="Alistair McClymont"
+              alt="GMD AI"
             />
           </div>
         ),
@@ -71,7 +71,7 @@ export default async function HomepageOGImage() {
               height: "100%",
               objectFit: "cover",
             }}
-            alt="Alistair McClymont"
+            alt="GMD AI"
           />
         </div>
       ),
@@ -100,7 +100,7 @@ export default async function HomepageOGImage() {
               height: "100%",
               objectFit: "cover",
             }}
-            alt="Alistair McClymont"
+            alt="GMD AI"
           />
         </div>
       ),

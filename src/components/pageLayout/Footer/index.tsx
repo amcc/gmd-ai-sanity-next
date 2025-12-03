@@ -7,7 +7,7 @@ const Footer = () => {
       <div className={styles.line}></div>
       <div className={styles.footer}>
         <div className={styles.footerContent}>
-          <div className="body-section">© {year} Alistair McClymont</div>
+          <div className="body-section">© {year} GMD AI</div>
         </div>
       </div>
     </footer>
