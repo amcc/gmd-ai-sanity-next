@@ -5,7 +5,6 @@ import { withPlausibleProxy } from "next-plausible";
 const nextConfig = withPlausibleProxy()({
   // Netlify-specific optimizations
   trailingSlash: false,
-  output: "standalone", // Better for Netlify deployment
 
   images: {
     remotePatterns: [
