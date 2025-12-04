@@ -1,5 +1,5 @@
 import { revalidatePath, revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -55,8 +55,11 @@ export async function GET() {
   }
 }
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
+    // Parse the webhook body to verify it's from Sanity
+    await request.json().catch(() => ({}));
+    
     const result = await handleRevalidation();
     return NextResponse.json(result, {
       headers: {
