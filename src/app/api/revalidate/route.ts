@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse the webhook body to verify it's from Sanity
     await request.json().catch(() => ({}));
-    
+
     const result = await handleRevalidation();
     return NextResponse.json(result, {
       headers: {
