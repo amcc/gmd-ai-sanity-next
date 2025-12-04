@@ -10,17 +10,17 @@ async function handleRevalidation() {
     // Revalidate content tags used in the site
     const tags = ["faq", "homepageSingleton"];
     const paths = ["/"];
-    
+
     // Revalidate tags
     tags.forEach((tag) => {
       revalidateTag(tag);
     });
-    
+
     // Revalidate paths
     paths.forEach((path) => {
       revalidatePath(path);
     });
-    
+
     // Also revalidate with layout to clear layout cache
     revalidatePath("/", "layout");
 
@@ -31,7 +31,8 @@ async function handleRevalidation() {
       revalidated_paths: paths,
       timestamp: new Date().toISOString(),
       cache_headers: {
-        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
         "CDN-Cache-Control": "no-store",
         "Vercel-CDN-Cache-Control": "no-store",
       },
@@ -70,8 +71,14 @@ export async function POST(req: NextRequest) {
     // Verify webhook signature for security
     const signature = req.headers.get(SIGNATURE_HEADER_NAME);
     const body = await req.text();
-    
-    if (!isValidSignature(body, signature ?? "", process.env.SANITY_WEBHOOK_SECRET ?? "")) {
+
+    if (
+      !isValidSignature(
+        body,
+        signature ?? "",
+        process.env.SANITY_WEBHOOK_SECRET ?? ""
+      )
+    ) {
       console.warn("Invalid webhook signature received");
       return NextResponse.json(
         { success: false, error: "Invalid signature" },
