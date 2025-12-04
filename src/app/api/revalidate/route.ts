@@ -1,5 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -64,9 +65,21 @@ export async function GET() {
   }
 }
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   try {
-    // Trigger revalidation immediately on webhook
+    // Verify webhook signature for security
+    const signature = req.headers.get(SIGNATURE_HEADER_NAME);
+    const body = await req.text();
+    
+    if (!isValidSignature(body, signature ?? "", process.env.SANITY_WEBHOOK_SECRET ?? "")) {
+      console.warn("Invalid webhook signature received");
+      return NextResponse.json(
+        { success: false, error: "Invalid signature" },
+        { status: 401 }
+      );
+    }
+
+    // Trigger revalidation on valid webhook
     const result = await handleRevalidation();
     return NextResponse.json(result, {
       headers: {
