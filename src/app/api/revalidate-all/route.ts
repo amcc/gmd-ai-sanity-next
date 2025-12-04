@@ -5,17 +5,10 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    // Clear all possible cache tags
-    const allTags = [
-      "artwork",
-      "biography",
-      "homepageSingleton",
-      "linkPageSingleton",
-      "studio",
-      "category",
-    ];
-    // Clear all major paths
-    const allPaths = ["/", "/artwork", "/biography", "/studio", "/contact"];
+    // Clear all cache tags used in the site
+    const allTags = ["faq", "homepageSingleton", "linkPageSingleton"];
+    // Clear all paths
+    const allPaths = ["/"];
     // Revalidate each tag multiple times
     for (let i = 0; i < 3; i++) {
       for (const tag of allTags) {

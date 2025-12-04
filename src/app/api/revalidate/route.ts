@@ -5,9 +5,9 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    // Force revalidate all major content tags multiple times to ensure it works
-    const tags = ["artwork", "biography", "studio", "homepageSingleton"];
-    const paths = ["/", "/artwork", "/biography", "/studio"];
+    // Revalidate content tags used in the site
+    const tags = ["faq", "homepageSingleton"];
+    const paths = ["/"];
     // Revalidate tags
     for (const tag of tags) {
       revalidateTag(tag);
@@ -16,9 +16,8 @@ export async function GET() {
     for (const path of paths) {
       revalidatePath(path);
     }
-    // Also try revalidating with layout: true to clear layout cache
+    // Also revalidate with layout to clear layout cache
     revalidatePath("/", "layout");
-    revalidatePath("/artwork", "layout");
     return NextResponse.json(
       {
         success: true,
