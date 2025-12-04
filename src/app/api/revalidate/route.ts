@@ -35,30 +35,14 @@ async function handleRevalidation() {
 export async function GET() {
   try {
     const result = await handleRevalidation();
-    return NextResponse.json(
-      result,
-      {
-        success: true,
-        message: "Cache revalidated successfully",
-        revalidated_tags: tags,
-        revalidated_paths: paths,
-        timestamp: new Date().toISOString(),
-        cache_headers: {
-          "Cache-Control":
-            "no-store, no-cache, must-revalidate, proxy-revalidate",
-          "CDN-Cache-Control": "no-store",
-          "Vercel-CDN-Cache-Control": "no-store",
-        },
+    return NextResponse.json(result, {
+      headers: {
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "CDN-Cache-Control": "no-store",
+        "Vercel-CDN-Cache-Control": "no-store",
       },
-      {
-        headers: {
-          "Cache-Control":
-            "no-store, no-cache, must-revalidate, proxy-revalidate",
-          "CDN-Cache-Control": "no-store",
-          "Vercel-CDN-Cache-Control": "no-store",
-        },
-      }
-    );
+    });
   } catch (error) {
     return NextResponse.json(
       {
