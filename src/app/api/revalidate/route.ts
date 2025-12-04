@@ -57,8 +57,15 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse the webhook body to verify it's from Sanity
-    await request.json().catch(() => ({}));
+    // Read the body if present
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && parseInt(contentLength) > 0) {
+      try {
+        await request.json();
+      } catch {
+        // Body parsing failed, but that's okay - continue with revalidation
+      }
+    }
 
     const result = await handleRevalidation();
     return NextResponse.json(result, {
