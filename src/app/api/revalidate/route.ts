@@ -1,36 +1,44 @@
 import { revalidatePath, revalidateTag } from "next/cache";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 async function handleRevalidation() {
-  // Revalidate content tags used in the site
-  const tags = ["faq", "homepageSingleton"];
-  const paths = ["/"];
-  // Revalidate tags
-  for (const tag of tags) {
-    revalidateTag(tag);
-  }
-  // Revalidate paths
-  for (const path of paths) {
-    revalidatePath(path);
-  }
-  // Also revalidate with layout to clear layout cache
-  revalidatePath("/", "layout");
+  try {
+    // Revalidate content tags used in the site
+    const tags = ["faq", "homepageSingleton"];
+    const paths = ["/"];
+    
+    // Revalidate tags
+    tags.forEach((tag) => {
+      revalidateTag(tag);
+    });
+    
+    // Revalidate paths
+    paths.forEach((path) => {
+      revalidatePath(path);
+    });
+    
+    // Also revalidate with layout to clear layout cache
+    revalidatePath("/", "layout");
 
-  return {
-    success: true,
-    message: "Cache revalidated successfully",
-    revalidated_tags: tags,
-    revalidated_paths: paths,
-    timestamp: new Date().toISOString(),
-    cache_headers: {
-      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-      "CDN-Cache-Control": "no-store",
-      "Vercel-CDN-Cache-Control": "no-store",
-    },
-  };
+    return {
+      success: true,
+      message: "Cache revalidated successfully",
+      revalidated_tags: tags,
+      revalidated_paths: paths,
+      timestamp: new Date().toISOString(),
+      cache_headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "CDN-Cache-Control": "no-store",
+        "Vercel-CDN-Cache-Control": "no-store",
+      },
+    };
+  } catch (error) {
+    console.error("Revalidation error:", error);
+    throw error;
+  }
 }
 
 export async function GET() {
@@ -56,18 +64,9 @@ export async function GET() {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    // Read the body if present
-    const contentLength = request.headers.get("content-length");
-    if (contentLength && parseInt(contentLength) > 0) {
-      try {
-        await request.json();
-      } catch {
-        // Body parsing failed, but that's okay - continue with revalidation
-      }
-    }
-
+    // Trigger revalidation immediately on webhook
     const result = await handleRevalidation();
     return NextResponse.json(result, {
       headers: {
@@ -78,6 +77,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
+    console.error("POST error:", error);
     return NextResponse.json(
       {
         success: false,
