@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 export default async function Home() {
   const faqs = (await sanityFetch({
     query: FAQS_QUERY,
-    revalidate: 604800, // 7 days fallback
     tags: ["faq"], // Cache tag for on-demand revalidation
   })) as Faq[];
 
