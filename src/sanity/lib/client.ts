@@ -6,13 +6,13 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  useCdn: false, // Must be false for tag-based revalidation to work
 });
 
 export async function sanityFetch<const QueryString extends string>({
   query,
   params = {},
-  revalidate = 60, // default revalidation time in seconds
+  revalidate = false, // default to no time-based revalidation
   tags = [],
 }: {
   query: QueryString;
